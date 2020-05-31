@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "backbase-test"
+    }
+  },
+  "defaultProject": "backbase-test",
+  "cli": {
+    "analytics": "8d427593-a346-4e7c-a025-53892e3b86c7"
+  }
 }

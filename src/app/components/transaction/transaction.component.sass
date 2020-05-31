@@ -1,0 +1,36 @@
+@import ../../../sass/utils
+
+.transaction
+  display: flex
+  height: 70px
+  border-right: $border-grey
+  &__color
+    width: 10px
+  &__date
+    display: flex
+    align-items: center
+    width: 120px
+    border-top: $border-grey
+    padding-left: 24px
+  &__image
+    width: 45px
+    border-top: $border-grey
+  &__data
+    display: flex
+    flex-direction: column
+    justify-content: center
+    flex-grow: 1
+    padding-left: 40px
+    border-top: $border-grey
+  &__name
+    font-size: 16px
+    font-weight: map-get($font-weights, 'bold')
+  &__method
+    margin-top: 4px
+  &__amount
+    display: flex
+    align-items: center
+    padding-right: 24px
+    border-top: $border-grey
+    font-size: 18px
+    font-weight: map-get($font-weights, 'bold')

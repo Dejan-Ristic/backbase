@@ -1,0 +1,38 @@
+@import ../../../sass/utils
+
+.popover
+  position: fixed
+  height: 100vh
+  width: 100%
+  background-color: rgba($grey-dark, .9)
+  z-index: 10
+  &__content
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: 0 48px
+    background-color: $white
+  &__heading
+    font-size: 20px
+    margin: 48px 0
+  &__line
+    font-size: 16px
+    margin-bottom: 12px
+  &__buttons
+    width: 100%
+    display: flex
+    justify-content: space-between
+    margin: 48px 0
+  &__button
+    @extend %button
+    &--cancel
+      background-color: $grey-light
+      margin-right: 48px
+    &--confirm
+      background-color: $orange
+      margin-left: 48px

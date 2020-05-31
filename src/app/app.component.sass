@@ -1,0 +1,144 @@
+@import ../sass/utils
+
+.wrapper
+  width: 100%
+  height: 100vh
+  display: flex
+  flex-direction: column
+
+.header
+  position: fixed
+  flex-shrink: 0
+  width: 100%
+  height: 90px
+  display: flex
+  justify-content: center
+  background-color: $white
+  border-bottom: 3px solid $orange
+  filter: $filter-shadow
+  z-index: 5
+  &__logo
+    margin: 20px calc(#{$section-offset} + #{$main-offset-side})
+    width: $section-large-width + $section-small-width + 2 * $section-offset
+    background-image: url(/assets/logo.jpg)
+    background-position: left center
+
+.main
+  flex-grow: 1
+  display: flex
+  justify-content: center
+  padding: $main-offset-top $main-offset-side $main-offset-bottom
+  background-image: url(/assets/background.jpg)
+  background-size: cover
+  background-position: center bottom
+
+.section-small
+  @extend %section
+  width: $section-small-width
+  &__heading
+    @extend %section-heading
+  &__icon
+    height: 40px
+    width: 40px
+    background-image: url(/assets/arrows.png)
+    background-color: red
+  &__text
+    flex-grow: 1
+    font-size: 16px
+    color: $white
+  &__form
+    display: flex
+    flex-direction: column
+    align-items: flex-end
+    background-color: $white
+    padding: 32px 16px
+  &__label
+    width: 100%
+    text-transform: uppercase
+    font-size: 12px
+    font-weight: map-get($font-weights, 'bold')
+  &__input
+    width: 100%
+    height: 40px
+    border-bottom: $border-grey
+    margin-bottom: 24px
+    padding-top: 8px
+    &:last-of-type
+      margin-bottom: 48px
+    &::placeholder
+      color: $grey-light
+  &__button
+    @extend %button
+    background-color: $orange
+
+.section-large
+  @extend %section
+  width: $section-large-width
+  &__heading
+    @extend %section-heading
+  &__icon
+    height: 60px
+    width: 60px
+    background-image: url(/assets/briefcase.png)
+    background-color: red
+  &__text
+    flex-grow: 1
+    font-size: 20px
+    color: $white
+  &__transactions
+    padding: 0 16px 24px
+    background-color: $white
+    border-bottom: $border-grey
+  &__divide
+    border-bottom: $border-grey
+
+.controls
+  display: flex
+  align-items: center
+  height: 84px
+  padding: 24px
+  background-color: $white
+  &__search-label
+    flex-grow: 1
+    height: 100%
+    margin-top: -12px
+  &__search-input
+    display: block
+    height: 100%
+    width: 100%
+    border-bottom: $border-grey
+    font-size: 16px
+    padding: 0 12px
+    &::placeholder
+      color: $grey-light
+  &__sort-text
+    font-size: 12px
+    font-weight: map-get($font-weights, 'bold')
+    padding: 0 16px
+  &__sort-option
+    display: flex
+    align-items: center
+    position: relative
+    height: 100%
+    font-size: 16px
+    padding: 0 28px
+    border-top: $border-grey
+    border-right: $border-grey
+    border-bottom: $border-grey
+    text-transform: uppercase
+    &:first-of-type
+      border-left: $border-grey
+    &:after
+      content: ''
+      position: absolute
+      right: 10px
+      top: 50%
+      box-sizing: border-box
+      transform: translateY(-50%)
+      width: 12px
+      height: 12px
+      border: 6px solid transparent
+      border-bottom-color: $grey-light
+
+.popover--hide
+  display: none

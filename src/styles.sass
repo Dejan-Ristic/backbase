@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import sass/utils
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+  border: none
+  font-family: 'Kanit', sans-serif
+  font-size: 14px
+  line-height: 1
+  font-style: normal
+  font-weight: map-get($font-weights, 'regular')
+  text-decoration: none
+  list-style-type: none
+  color: $grey-dark
+  outline: 0 none transparent
+  background-repeat: no-repeat
+  background-position: center
+  background-size: contain
+  &:focus
+    outline: 0 none transparent
+  &::-moz-focus-inner
+    border: 0

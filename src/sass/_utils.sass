@@ -1,0 +1,43 @@
+// colors
+$white: #ffffff
+$blue: #0c8397
+$orange: #ee7033
+$grey-dark: #373737
+$grey-light: #a2a09c
+
+// misc
+$filter-shadow: drop-shadow(0 0 3px $grey-dark)
+$font-weights: ('regular': 400, 'bold': 700)
+$border-grey: 1px solid $grey-light
+
+// sections
+$section-small-width: 320px
+$section-large-width: 860px
+
+// offsets
+$section-offset: 16px
+$main-offset-top: calc(160px - #{$section-offset})
+$main-offset-bottom: calc(70px - #{$section-offset})
+$main-offset-side: $section-offset
+
+// placeholders
+%section
+  margin: $section-offset
+  filter: $filter-shadow
+  overflow: auto
+
+%section-heading
+  display: flex
+  align-items: center
+  background-color: $blue
+  text-align: center
+
+%button
+  height: 40px
+  width: 100%
+  max-width: 200px
+  min-width: 160px
+  border-radius: 5px
+  font-size: 16px
+  color: $white
+  text-transform: uppercase

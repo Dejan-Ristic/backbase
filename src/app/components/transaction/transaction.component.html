@@ -1,0 +1,10 @@
+<div class='transaction'>
+  <div class='transaction__color' [ngStyle]='{"background-color": transData.categoryCode}'></div>
+  <div class='transaction__date'>{{date}}</div>
+  <div class='transaction__image' [ngStyle]='{"background-image": "url(" + transData.merchantLogo + ")"}'></div>
+  <div class='transaction__data'>
+    <div class='transaction__name'>{{transData.merchant}}</div>
+    <div class='transaction__method'>{{transData.transactionType}}</div>
+  </div>
+  <div class='transaction__amount'>-${{transData.amount}}</div>
+</div>
