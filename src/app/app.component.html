@@ -1,5 +1,7 @@
 <div class='wrapper'>
-  <app-popover class='popover--hide' account='kitadjoka' amount='567.23'></app-popover>
+  <app-popover [ngClass]='{"popover--hide": !showPopover}' [parent]='this'
+               [amount]='transactionForm.get("amount").value'
+               [account]='transactionForm.get("toAccount").value'></app-popover>
   <header class='header'>
     <div class='header__logo'></div>
   </header>
@@ -9,17 +11,25 @@
         <div class='section-small__icon'></div>
         <h1 class='section-small__text'>Make a Transfer</h1>
       </div>
-      <form class='section-small__form'>
-        <label for='fromAccount' class='section-small__label'>from account</label>
-        <input id='fromAccount' type='text' class='section-small__input'
-               placeholder='Free Checking - $5664.67'>
-        <label for='toAccount' class='section-small__label'>to account</label>
-        <input id='toAccount' type='text' class='section-small__input'
-               placeholder='Transfer receiver'>
-        <label for='amount' class='section-small__label'>amount</label>
-        <input id='amount' type='text' class='section-small__input'
-               placeholder='$0.00'>
-        <button type='submit' class='section-small__button'>submit</button>
+      <form class='section-small__form' [formGroup]='transactionForm' (ngSubmit)='validateForm()' novalidate>
+        <label for='fromAccount' class='section-small__form-field'>
+          <span class='section-small__label'>from account</span>
+          <input id='fromAccount' type='text' class='section-small__input'
+                 placeholder='Free Checking - ${{currentBalance}}' disabled>
+        </label>
+        <label for='toAccount' class='section-small__form-field'>
+          <span class='section-small__label'>to account</span>
+          <input id='toAccount' type='text' class='section-small__input'
+                 placeholder='Transfer receiver' formControlName='toAccount'>
+          <span *ngIf='!transactionForm.get("toAccount").valid' class='section-small__error'>{{toAccountError}}</span>
+        </label>
+        <label for='amount' class='section-small__form-field'>
+          <span class='section-small__label'>amount</span>
+          <input id='amount' type='text' class='section-small__input'
+                 placeholder='$0.00' formControlName='amount'>
+          <span *ngIf='!transactionForm.get("amount").valid' class='section-small__error'>{{amountError}}</span>
+        </label>
+        <button class='section-small__button' type='submit'>submit</button>
       </form>
     </section>
     <section class='section-large'>

@@ -4,8 +4,8 @@
     <p class="popover__line">To account: {{account}}</p>
     <p class="popover__line">Amount: {{amount}}</p>
     <div class="popover__buttons">
-      <button class="popover__button popover__button--cancel">Cancel</button>
-      <button class="popover__button popover__button--confirm">Confirm</button>
+      <button class="popover__button popover__button--cancel" (click)='cancel()'>Cancel</button>
+      <button class="popover__button popover__button--confirm" (click)='confirm()'>Confirm</button>
     </div>
   </div>
 </div>

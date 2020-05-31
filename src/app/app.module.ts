@@ -4,7 +4,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {TransactionComponent} from './components/transaction/transaction.component';
 import {TransactionsService} from './providers/transactions.service';
-import { PopoverComponent } from './components/popover/popover.component';
+import {PopoverComponent} from './components/popover/popover.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { PopoverComponent } from './components/popover/popover.component';
     PopoverComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [TransactionsService],
   bootstrap: [AppComponent]

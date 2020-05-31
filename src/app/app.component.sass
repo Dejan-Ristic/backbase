@@ -52,21 +52,36 @@
     align-items: flex-end
     background-color: $white
     padding: 32px 16px
+  &__form-field
+    position: relative
+    display: block
+    height: 78px
+    width: 100%
+    &:last-of-type
+      margin-bottom: 24px
   &__label
+    display: block
     width: 100%
     text-transform: uppercase
     font-size: 12px
     font-weight: map-get($font-weights, 'bold')
+    height: 12px
   &__input
     width: 100%
     height: 40px
     border-bottom: $border-grey
     margin-bottom: 24px
     padding-top: 8px
-    &:last-of-type
-      margin-bottom: 48px
+    background-color: transparent
     &::placeholder
       color: $grey-light
+  &__error
+    position: absolute
+    left: 0
+    top: 54px
+    color: $red
+    font-size: 12px
+
   &__button
     @extend %button
     background-color: $orange
