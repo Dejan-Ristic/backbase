@@ -11,7 +11,7 @@ export class TransactionsService {
   public transactions = of(this.allTransactions);
 
   public addTransaction(newTran: Transaction) {
-    this.allTransactions.push(newTran);
+    this.allTransactions.unshift(newTran);
     this.transactions = of(this.allTransactions);
   }
 

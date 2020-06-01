@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public transactionsToShow: Array<Transaction>;
   public showPopover = false;
   public transactionForm: FormGroup;
-  public currentBalance = 67.56;
+  public currentBalance = 667.56;
   public toAccountError: string;
   public amountError: string;
   public newTransaction: Transaction;

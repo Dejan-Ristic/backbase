@@ -1,18 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-popover',
   templateUrl: './popover.component.html',
   styleUrls: ['./popover.component.sass']
 })
-export class PopoverComponent implements OnInit {
+export class PopoverComponent {
 
   @Input() account: string;
   @Input() amount: number;
   @Input() parent: any;
-
-  ngOnInit(): void {
-  }
 
   public cancel() {
     this.parent.showPopover = false;
