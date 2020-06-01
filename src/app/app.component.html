@@ -39,7 +39,7 @@
       </div>
       <div class='controls'>
         <label class='controls__search-label'>
-          <input type='text' class='controls__search-input' placeholder='Search by typing...'>
+          <input type='text' class='controls__search-input' placeholder='Search by typing...' (input)='checkList($event)'>
         </label>
         <p class='controls__sort-text'>Sort by</p>
         <div class='controls__sort-option'>date</div>

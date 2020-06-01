@@ -13,12 +13,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public transactionsSubscription: Subscription;
   public transactions: Array<Transaction>;
+  public transactionsToShow: Array<Transaction>;
   public showPopover = false;
   public transactionForm: FormGroup;
   public currentBalance = 67.56;
   public toAccountError: string;
   public amountError: string;
   public newTransaction: Transaction;
+  private searchExpression: string;
 
   constructor(private transactionsService: TransactionsService,
               private formBuilder: FormBuilder) {
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     this.transactionsSubscription = this.transactionsService.transactions.subscribe(trans => {
       this.transactions = trans;
+      this.modifyList();
     })
   }
 
@@ -41,21 +44,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public validateForm() {
-    if (this.transactionForm.valid) {
-      if (this.currentBalance - this.transactionForm.get('amount').value < 0) {
-        this.transactionForm.controls['amount'].setErrors({invalid: true});
-        this.amountError = 'Not enough money';
-      } else {
-        this.showPopover = true;
-      }
-      return;
-    }
     if (!this.transactionForm.get('toAccount').valid) {
       this.toAccountError = 'Required, max 30 chars long';
     }
     if (!this.transactionForm.get('amount').valid) {
       this.amountError = 'Max 500, 2 decimals';
     }
+    if (this.currentBalance - this.transactionForm.get('amount').value < 0) {
+      this.transactionForm.controls['amount'].setErrors({invalid: true});
+      this.amountError = 'Not enough money';
+    }
+    if (this.transactionForm.valid) this.showPopover = true;
   }
 
   public completeTransaction() {
@@ -71,10 +70,22 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currentBalance = parseFloat((this.currentBalance - transferAmount).toFixed(2));
     this.transactionsService.addTransaction(this.newTransaction);
     this.transactionForm.reset();
-    for (let controlsKey in this.transactionForm.controls) {
-      this.transactionForm.controls[controlsKey].setErrors(null);
-    }
+    this.amountError = '';
+    this.toAccountError = '';
     this.showPopover = false;
+  }
+
+  private modifyList() {
+    // if
+  }
+
+  public checkList(event) {
+    this.searchExpression = event.target.value;
+    let list = this.transactions.filter(transaction =>
+      transaction.merchant.toLowerCase().indexOf(this.searchExpression.toLowerCase()) >= 0 ||
+      transaction.transactionType.toLowerCase().indexOf(this.searchExpression.toLowerCase()) >= 0
+    )
+    console.log(list);
   }
 
 }
