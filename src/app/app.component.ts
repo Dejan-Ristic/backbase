@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.toAccountError = 'Required, max 30 chars long';
     }
     if (!this.transactionForm.get('amount').valid) {
-      this.amountError = 'Number, max 2 decimals';
+      this.amountError = 'Positive num, max 2 decimals';
     }
     if (this.currentBalance - parseFloat(this.transactionForm.get('amount').value) < -500) {
       this.transactionForm.controls['amount'].setErrors({invalid: true});
@@ -92,7 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.sortCriteria.asc = !this.sortCriteria.asc;
     } else {
       this.sortCriteria.field = criteria;
-      this.sortCriteria.asc = true;
+      this.sortCriteria.asc = false;
     }
     this.sortList();
   }
