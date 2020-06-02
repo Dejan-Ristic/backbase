@@ -3,6 +3,7 @@ import {TransactionsService} from './providers/transactions.service';
 import {Subscription} from 'rxjs';
 import {Transaction} from './interfaces/transaction.interface';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SortCriteria} from "./interfaces/sort-criteria.interface";
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,21 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class AppComponent implements OnInit, OnDestroy {
 
   public transactionsSubscription: Subscription;
-  public transactions: Array<Transaction>;
-  public transactionsToShow: Array<Transaction>;
+  public transactionsAll: Array<Transaction>;
+  public transactionsSorted: Array<Transaction>;
+  public transactionsFiltered: Array<Transaction>
+  public transactionsDisplayed: Array<Transaction>
+  public sortCriteria: SortCriteria = {
+    field: 'transactionDate',
+    asc: false
+  };
+  public filterCriteria: string = '';
   public showPopover = false;
   public transactionForm: FormGroup;
   public currentBalance = 667.56;
   public toAccountError: string;
   public amountError: string;
   public newTransaction: Transaction;
-  private searchExpression: string;
 
   constructor(private transactionsService: TransactionsService,
               private formBuilder: FormBuilder) {
@@ -34,8 +41,8 @@ export class AppComponent implements OnInit, OnDestroy {
         Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]]
     });
     this.transactionsSubscription = this.transactionsService.transactions.subscribe(trans => {
-      this.transactions = trans;
-      this.modifyList();
+      this.transactionsAll = trans;
+      this.sortList();
     })
   }
 
@@ -75,17 +82,45 @@ export class AppComponent implements OnInit, OnDestroy {
     this.showPopover = false;
   }
 
-  private modifyList() {
-    // if
+  public applyFilter(event: any) {
+    this.filterCriteria = event ? event.target.value : '';
+    this.filterList();
   }
 
-  public checkList(event) {
-    this.searchExpression = event.target.value;
-    let list = this.transactions.filter(transaction =>
-      transaction.merchant.toLowerCase().indexOf(this.searchExpression.toLowerCase()) >= 0 ||
-      transaction.transactionType.toLowerCase().indexOf(this.searchExpression.toLowerCase()) >= 0
-    )
-    console.log(list);
+  public applySort(criteria) {
+    if (criteria === this.sortCriteria.field) {
+      this.sortCriteria.asc = !this.sortCriteria.asc;
+    } else {
+      this.sortCriteria.field = criteria;
+      this.sortCriteria.asc = true;
+    }
+    this.sortList();
+  }
+
+  private sortList() {
+    this.transactionsSorted = this.transactionsAll.slice(0);
+    if (this.sortCriteria.field !== 'merchant') {
+      this.transactionsSorted.sort((a, b) => {
+        return this.sortCriteria.asc ? a[this.sortCriteria.field] - b[this.sortCriteria.field] :
+          b[this.sortCriteria.field] - a[this.sortCriteria.field];
+      });
+    } else {
+      this.transactionsSorted.sort((a, b) => {
+        return this.sortCriteria.asc ? ('' + a[this.sortCriteria.field]).localeCompare(b[this.sortCriteria.field]) :
+          ('' + b[this.sortCriteria.field]).localeCompare(a[this.sortCriteria.field]);
+      });
+    }
+    this.filterList();
+  }
+
+  public filterList() {
+    if (this.filterCriteria.length) {
+      this.transactionsFiltered = this.transactionsSorted.filter(transaction =>
+        transaction.merchant.toLowerCase().indexOf(this.filterCriteria.toLowerCase()) >= 0 ||
+        transaction.transactionType.toLowerCase().indexOf(this.filterCriteria.toLowerCase()) >= 0
+      );
+      this.transactionsDisplayed = this.transactionsFiltered;
+    } else this.transactionsDisplayed = this.transactionsSorted;
   }
 
 }

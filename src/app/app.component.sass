@@ -31,6 +31,7 @@
   background-image: url(/assets/background.jpg)
   background-size: cover
   background-position: center bottom
+  background-attachment: fixed
 
 .section-small
   @extend %section
@@ -115,6 +116,7 @@
   background-color: $white
   &__search-label
     flex-grow: 1
+    position: relative
     height: 100%
     margin-top: -12px
   &__search-input
@@ -123,7 +125,7 @@
     width: 100%
     border-bottom: $border-grey
     font-size: 16px
-    padding: 0 12px
+    padding: 0 48px 0 12px
     &::placeholder
       color: $grey-light
   &__sort-text
@@ -141,19 +143,36 @@
     border-right: $border-grey
     border-bottom: $border-grey
     text-transform: uppercase
+    &:hover
+      cursor: pointer
+      background-color: rgba($grey-light, .15)
     &:first-of-type
       border-left: $border-grey
     &:after
       content: ''
       position: absolute
       right: 10px
-      top: 50%
       box-sizing: border-box
-      transform: translateY(-50%)
       width: 12px
       height: 12px
       border: 6px solid transparent
-      border-bottom-color: $grey-light
+    &--selected-asc
+      &:after
+        top: 16px
+        border-top-color: $grey-light
+    &--selected-desc
+      &:after
+        top: 9px
+        border-bottom-color: $grey-light
+  &__cancel-button
+    position: absolute
+    right: 0
+    bottom: 6px
+    display: block
+    width: 24px
+    height: 24px
+    background-image: url(data:image/png;base64,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)
+    cursor: pointer
 
 .popover--hide
   display: none
