@@ -42,16 +42,18 @@
           <input type='text' class='controls__search-input' placeholder='Search by typing...' (input)='applyFilter($event)' [value]='filterCriteria'>
           <span class='controls__cancel-button' *ngIf='filterCriteria.length' (click)='applyFilter(null)'></span>
         </label>
-        <p class='controls__sort-text'>Sort by</p>
-        <div class='controls__sort-option' (click)='applySort("transactionDate")'
-             [ngClass]='{"controls__sort-option--selected-asc": sortCriteria.field === "transactionDate" && sortCriteria.asc,
-                         "controls__sort-option--selected-desc": sortCriteria.field === "transactionDate" && !sortCriteria.asc}'>date</div>
-        <div class='controls__sort-option' (click)='applySort("merchant")'
-             [ngClass]='{"controls__sort-option--selected-asc": sortCriteria.field === "merchant" && sortCriteria.asc,
-                         "controls__sort-option--selected-desc": sortCriteria.field === "merchant" && !sortCriteria.asc}'>beneficiary</div>
-        <div class='controls__sort-option' (click)='applySort("amount")'
-             [ngClass]='{"controls__sort-option--selected-asc": sortCriteria.field === "amount" && sortCriteria.asc,
-                         "controls__sort-option--selected-desc": sortCriteria.field === "amount" && !sortCriteria.asc}'>amount</div>
+        <div class="controls__sort">
+          <p class='controls__sort-text'>Sort by</p>
+          <div class='controls__sort-option' (click)='applySort("transactionDate")'
+               [ngClass]='{"controls__sort-option--selected-asc": sortCriteria.field === "transactionDate" && sortCriteria.asc,
+                           "controls__sort-option--selected-desc": sortCriteria.field === "transactionDate" && !sortCriteria.asc}'>date</div>
+          <div class='controls__sort-option' (click)='applySort("merchant")'
+               [ngClass]='{"controls__sort-option--selected-asc": sortCriteria.field === "merchant" && sortCriteria.asc,
+                           "controls__sort-option--selected-desc": sortCriteria.field === "merchant" && !sortCriteria.asc}'>beneficiary</div>
+          <div class='controls__sort-option' (click)='applySort("amount")'
+               [ngClass]='{"controls__sort-option--selected-asc": sortCriteria.field === "amount" && sortCriteria.asc,
+                           "controls__sort-option--selected-desc": sortCriteria.field === "amount" && !sortCriteria.asc}'>amount</div>
+        </div>
       </div>
       <div class='section-large__transactions'>
         <app-transaction *ngFor='let tran of transactionsDisplayed' [transData]=tran></app-transaction>

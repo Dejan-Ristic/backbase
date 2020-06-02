@@ -25,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public showPopover = false;
   public transactionForm: FormGroup;
   public currentBalance = 667.56;
+  private transferredBalance = 0;
   public toAccountError: string;
   public amountError: string;
   public newTransaction: Transaction;
@@ -57,9 +58,9 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!this.transactionForm.get('amount').valid) {
       this.amountError = 'Max 500, 2 decimals';
     }
-    if (this.currentBalance - this.transactionForm.get('amount').value < 0) {
+    if (this.transferredBalance + parseFloat(this.transactionForm.get('amount').value) > 500) {
       this.transactionForm.controls['amount'].setErrors({invalid: true});
-      this.amountError = 'Not enough money';
+      this.amountError = `You have ${parseFloat((500 - this.transferredBalance).toFixed(2))} available`;
     }
     if (this.transactionForm.valid) this.showPopover = true;
   }
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
       transactionType: 'Payment'
     }
     this.currentBalance = parseFloat((this.currentBalance - transferAmount).toFixed(2));
+    this.transferredBalance = parseFloat((this.transferredBalance + transferAmount).toFixed(2));
     this.transactionsService.addTransaction(this.newTransaction);
     this.transactionForm.reset();
     this.amountError = '';

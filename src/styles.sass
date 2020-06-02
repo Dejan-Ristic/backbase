@@ -1,5 +1,6 @@
 @import sass/utils
 
+// css globals and resets
 *
   box-sizing: border-box
   margin: 0
@@ -21,3 +22,49 @@
     outline: 0 none transparent
   &::-moz-focus-inner
     border: 0
+
+// responsive values
+@media only screen and (min-width: #{$breakpoint-huge})
+  :root
+    --header-height: 90px
+    --header-margin: 20px
+    --controls-layout-direction: row
+    --controls-height: 84px
+    --controls-search-bottom-margin: 0
+    --controls-search-width: auto
+
+@media only screen and (min-width: #{$breakpoint-high}) and (max-width: #{$breakpoint-huge})
+  :root
+    --header-height: 90px
+    --header-margin: 20px
+    --controls-layout-direction: column
+    --controls-height: 120px
+    --controls-search-bottom-margin: 12px
+    --controls-search-width: 100%
+
+@media only screen and (min-width: #{$breakpoint-mid}) and (max-width: #{$breakpoint-high})
+  :root
+    --header-height: 90px
+    --header-margin: 20px
+    --controls-layout-direction: column
+    --controls-height: 120px
+    --controls-search-bottom-margin: 12px
+    --controls-search-width: 100%
+
+@media only screen and (min-width: #{$breakpoint-low}) and (max-width: #{$breakpoint-mid})
+  :root
+    --header-height: 50px
+    --header-margin: 10px
+    --controls-layout-direction: column
+    --controls-height: 120px
+    --controls-search-bottom-margin: 12px
+    --controls-search-width: 100%
+
+@media only screen and (max-width: #{$breakpoint-low})
+  :root
+    --header-height: 40px
+    --header-margin: 6px
+    --controls-layout-direction: column
+    --controls-height: 120px
+    --controls-search-bottom-margin: 12px
+    --controls-search-width: 100%

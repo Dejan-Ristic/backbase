@@ -10,7 +10,7 @@
   position: fixed
   flex-shrink: 0
   width: 100%
-  height: 90px
+  height: var(--header-height)
   display: flex
   justify-content: center
   background-color: $white
@@ -18,7 +18,7 @@
   filter: $filter-shadow
   z-index: 5
   &__logo
-    margin: 20px calc(#{$section-offset} + #{$main-offset-side})
+    margin: var(--header-margin) calc(#{$section-offset} + #{$main-offset-side})
     width: $section-large-width + $section-small-width + 2 * $section-offset
     background-image: url(/assets/logo.jpg)
     background-position: left center
@@ -111,14 +111,17 @@
 .controls
   display: flex
   align-items: center
-  height: 84px
+  flex-direction: var(--controls-layout-direction)
+  height: var(--controls-height)
   padding: 24px
   background-color: $white
   &__search-label
     flex-grow: 1
     position: relative
     height: 100%
+    width: var(--controls-search-width)
     margin-top: -12px
+    margin-bottom: var(--controls-search-bottom-margin)
   &__search-input
     display: block
     height: 100%
@@ -128,10 +131,15 @@
     padding: 0 48px 0 12px
     &::placeholder
       color: $grey-light
+  &__sort
+    display: flex
+    align-items: center
+    height: 100%
   &__sort-text
     font-size: 12px
     font-weight: map-get($font-weights, 'bold')
     padding: 0 16px
+    flex-shrink: 0
   &__sort-option
     display: flex
     align-items: center
@@ -158,11 +166,11 @@
       border: 6px solid transparent
     &--selected-asc
       &:after
-        top: 16px
+        top: 14px
         border-top-color: $grey-light
     &--selected-desc
       &:after
-        top: 9px
+        top: 8px
         border-bottom-color: $grey-light
   &__cancel-button
     position: absolute
