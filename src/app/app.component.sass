@@ -18,16 +18,17 @@
   filter: $filter-shadow
   z-index: 5
   &__logo
-    margin: var(--header-margin) calc(#{$section-offset} + #{$main-offset-side})
-    width: $section-large-width + $section-small-width + 2 * $section-offset
+    margin: var(--header-margin) calc(var(--section-offset) + var(--main-offset-side))
+    width: calc(var(--section-large-width) + var(--section-small-width) + 2 * var(--section-offset))
     background-image: url(/assets/logo.jpg)
     background-position: left center
 
 .main
   flex-grow: 1
   display: flex
-  justify-content: center
-  padding: $main-offset-top $main-offset-side $main-offset-bottom
+  flex-direction: var(--main-layout-direction)
+  justify-content: var(--main-justify)
+  padding: var(--main-offset-top) var(--main-offset-side) var(--main-offset-bottom)
   background-image: url(/assets/background.jpg)
   background-size: cover
   background-position: center bottom
@@ -35,7 +36,7 @@
 
 .section-small
   @extend %section
-  width: $section-small-width
+  width: var(--section-small-width)
   &__heading
     @extend %section-heading
   &__icon
@@ -89,7 +90,7 @@
 
 .section-large
   @extend %section
-  width: $section-large-width
+  width: var(--section-large-width)
   &__heading
     @extend %section-heading
   &__icon
@@ -124,7 +125,7 @@
     margin-bottom: var(--controls-search-bottom-margin)
   &__search-input
     display: block
-    height: 100%
+    height: var(--input-height)
     width: 100%
     border-bottom: $border-grey
     font-size: 16px
@@ -133,6 +134,7 @@
       color: $grey-light
   &__sort
     display: flex
+    flex-direction: var(--controls-sort-layout-direction)
     align-items: center
     height: 100%
   &__sort-text
@@ -144,18 +146,18 @@
     display: flex
     align-items: center
     position: relative
-    height: 100%
+    height: var(--controls-sort-option-height)
     font-size: 16px
     padding: 0 28px
-    border-top: $border-grey
-    border-right: $border-grey
-    border-bottom: $border-grey
+    border: $border-grey
+    border-left-width: var(--controls-sort-option-border-left)
     text-transform: uppercase
+    margin: var(--controls-sort-option-margin)
     &:hover
       cursor: pointer
       background-color: rgba($grey-light, .15)
     &:first-of-type
-      border-left: $border-grey
+      border-left-width: 1px
     &:after
       content: ''
       position: absolute

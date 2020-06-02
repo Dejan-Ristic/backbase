@@ -26,45 +26,155 @@
 // responsive values
 @media only screen and (min-width: #{$breakpoint-huge})
   :root
+    --main-layout-direction: row
     --header-height: 90px
     --header-margin: 20px
+    --section-small-width: 320px
+    --section-large-width: 860px
+    --section-offset: 16px
+    --main-offset-top: calc(160px - var(--section-offset))
+    --main-offset-bottom: calc(70px - var(--section-offset))
+    --main-offset-side: var(--section-offset)
+    --main-justify: center
     --controls-layout-direction: row
     --controls-height: 84px
     --controls-search-bottom-margin: 0
     --controls-search-width: auto
+    --controls-sort-layout-direction: row
+    --controls-sort-option-margin: 0
+    --controls-sort-option-height: 100%
+    --controls-sort-option-border-left: 0
+    --input-height: 100%
+    // transaction component
+    --trans-height: 70px
+    --trans-image-display: block
+    --date-width: 120px
+    --date-padding: 24px
+    --data-padding: 40px
+    // popover component
+    --popover-buttons-direction: row
+    --popover-button-margin: 48px
 
 @media only screen and (min-width: #{$breakpoint-high}) and (max-width: #{$breakpoint-huge})
   :root
+    --main-layout-direction: row
     --header-height: 90px
     --header-margin: 20px
+    --section-small-width: 320px
+    --section-large-width: 860px
+    --section-offset: 16px
+    --main-offset-top: calc(160px - var(--section-offset))
+    --main-offset-bottom: calc(70px - var(--section-offset))
+    --main-offset-side: var(--section-offset)
+    --main-justify: center
     --controls-layout-direction: column
     --controls-height: 120px
     --controls-search-bottom-margin: 12px
     --controls-search-width: 100%
+    --controls-sort-layout-direction: row
+    --controls-sort-option-margin: 0
+    --controls-sort-option-height: 100%
+    --controls-sort-option-border-left: 0
+    --input-height: 100%
+    // transaction component
+    --trans-height: 70px
+    --trans-image-display: block
+    --date-width: 120px
+    --date-padding: 24px
+    --data-padding: 40px
+    // popover component
+    --popover-buttons-direction: row
+    --popover-button-margin: 48px
 
 @media only screen and (min-width: #{$breakpoint-mid}) and (max-width: #{$breakpoint-high})
   :root
-    --header-height: 90px
-    --header-margin: 20px
+    --main-layout-direction: column
+    --header-height: 70px
+    --header-margin: 16px
+    --section-small-width: calc(100% - 2 * var(--section-offset))
+    --section-large-width: calc(100% - 2 * var(--section-offset))
+    --section-offset: 16px
+    --main-offset-top: calc(100px - var(--section-offset))
+    --main-offset-bottom: var(--section-offset)
+    --main-offset-side: var(--section-offset)
+    --main-justify: center
     --controls-layout-direction: column
     --controls-height: 120px
     --controls-search-bottom-margin: 12px
     --controls-search-width: 100%
+    --controls-sort-layout-direction: row
+    --controls-sort-option-margin: 0
+    --controls-sort-option-height: 100%
+    --controls-sort-option-border-left: 0
+    --input-height: 100%
+    // transaction component
+    --trans-height: 70px
+    --trans-image-display: block
+    --date-width: 120px
+    --date-padding: 24px
+    --data-padding: 40px
+    // popover component
+    --popover-buttons-direction: row
+    --popover-button-margin: 48px
 
 @media only screen and (min-width: #{$breakpoint-low}) and (max-width: #{$breakpoint-mid})
   :root
+    --main-layout-direction: column
     --header-height: 50px
     --header-margin: 10px
+    --section-small-width: calc(100% - 2 * var(--section-offset))
+    --section-large-width: calc(100% - 2 * var(--section-offset))
+    --section-offset: 8px
+    --main-offset-top: calc(70px - var(--section-offset))
+    --main-offset-bottom: var(--section-offset)
+    --main-offset-side: var(--section-offset)
+    --main-justify: flex-start
     --controls-layout-direction: column
-    --controls-height: 120px
+    --controls-height: auto
     --controls-search-bottom-margin: 12px
     --controls-search-width: 100%
+    --controls-sort-layout-direction: column
+    --controls-sort-option-margin: 6px 0 0
+    --controls-sort-option-height: 36px
+    --controls-sort-option-border-left: 1px
+    --input-height: auto
+    // transaction component
+    --trans-height: 50px
+    --trans-image-display: none
+    --date-width: auto
+    --date-padding: 12px
+    --data-padding: 15px
+    // popover component
+    --popover-buttons-direction: column
+    --popover-button-margin: 12px 0
 
 @media only screen and (max-width: #{$breakpoint-low})
   :root
+    --main-layout-direction: column
     --header-height: 40px
     --header-margin: 6px
+    --section-small-width: calc(100% - 2 * var(--section-offset))
+    --section-large-width: calc(100% - 2 * var(--section-offset))
+    --section-offset: 4px
+    --main-offset-top: calc(50px - var(--section-offset))
+    --main-offset-bottom: var(--section-offset)
+    --main-offset-side: var(--section-offset)
+    --main-justify: flex-start
     --controls-layout-direction: column
-    --controls-height: 120px
+    --controls-height: auto
     --controls-search-bottom-margin: 12px
     --controls-search-width: 100%
+    --controls-sort-layout-direction: column
+    --controls-sort-option-margin: 6px 0 0
+    --controls-sort-option-height: 36px
+    --controls-sort-option-border-left: 1px
+    --input-height: auto
+    // transaction component
+    --trans-height: 50px
+    --trans-image-display: none
+    --date-width: auto
+    --date-padding: 6px
+    --data-padding: 10px
+    // popover component
+    --popover-buttons-direction: column
+    --popover-button-margin: 12px 0
