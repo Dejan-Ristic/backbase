@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
   public showPopover = false;
   public transactionForm: FormGroup;
   public currentBalance = 667.56;
-  private transferredBalance = 0;
   public toAccountError: string;
   public amountError: string;
   public newTransaction: Transaction;
@@ -38,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.transactionForm = this.formBuilder.group({
       toAccount: ['', [Validators.required, Validators.maxLength(30),
         Validators.pattern('^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$')]],
-      amount: ['', [Validators.required, Validators.max(500),
+      amount: ['', [Validators.required, Validators.min(0.01),
         Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]]
     });
     this.transactionsSubscription = this.transactionsService.transactions.subscribe(trans => {
@@ -56,11 +55,11 @@ export class AppComponent implements OnInit, OnDestroy {
       this.toAccountError = 'Required, max 30 chars long';
     }
     if (!this.transactionForm.get('amount').valid) {
-      this.amountError = 'Max 500, 2 decimals';
+      this.amountError = 'Number, max 2 decimals';
     }
-    if (this.transferredBalance + parseFloat(this.transactionForm.get('amount').value) > 500) {
+    if (this.currentBalance - parseFloat(this.transactionForm.get('amount').value) < -500) {
       this.transactionForm.controls['amount'].setErrors({invalid: true});
-      this.amountError = `You have ${parseFloat((500 - this.transferredBalance).toFixed(2))} available`;
+      this.amountError = 'Your limit is -$500.00';
     }
     if (this.transactionForm.valid) this.showPopover = true;
   }
@@ -76,7 +75,6 @@ export class AppComponent implements OnInit, OnDestroy {
       transactionType: 'Payment'
     }
     this.currentBalance = parseFloat((this.currentBalance - transferAmount).toFixed(2));
-    this.transferredBalance = parseFloat((this.transferredBalance + transferAmount).toFixed(2));
     this.transactionsService.addTransaction(this.newTransaction);
     this.transactionForm.reset();
     this.amountError = '';
