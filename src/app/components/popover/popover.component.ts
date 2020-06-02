@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-popover',
@@ -9,14 +9,14 @@ export class PopoverComponent {
 
   @Input() account: string;
   @Input() amount: number;
-  @Input() parent: any;
+  @Output() select = new EventEmitter<boolean>();
 
   public cancel() {
-    this.parent.showPopover = false;
+    this.select.emit(false);
   }
 
   public confirm() {
-    this.parent.completeTransaction();
+    this.select.emit(true);
   }
 
 }

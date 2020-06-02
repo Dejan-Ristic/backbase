@@ -28,26 +28,36 @@ export class AppComponent implements OnInit, OnDestroy {
   public toAccountError: string;
   public amountError: string;
   public newTransaction: Transaction;
+  public readonly accountPattern = '^[a-zA-Z-,]+(s{0,1}[a-zA-Z-, ])*$';
+  public readonly amountPattern = '[0-9]+(\\.[0-9][0-9]?)?';
 
   constructor(private transactionsService: TransactionsService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
-    this.transactionForm = this.formBuilder.group({
-      toAccount: ['', [Validators.required, Validators.maxLength(30),
-        Validators.pattern('^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$')]],
-      amount: ['', [Validators.required, Validators.min(0.01),
-        Validators.pattern('[0-9]+(\\.[0-9][0-9]?)?')]]
-    });
-    this.transactionsSubscription = this.transactionsService.transactions.subscribe(trans => {
-      this.transactionsAll = trans;
-      this.sortList();
-    })
+    this.generateForm();
+    this.getTransactions();
   }
 
   ngOnDestroy() {
     this.transactionsSubscription.unsubscribe();
+  }
+
+  private generateForm() {
+    this.transactionForm = this.formBuilder.group({
+      toAccount: ['', [Validators.required, Validators.maxLength(30),
+        Validators.pattern(this.accountPattern)]],
+      amount: ['', [Validators.required, Validators.min(0.01),
+        Validators.pattern(this.amountPattern)]]
+    });
+  }
+
+  private getTransactions() {
+    this.transactionsSubscription = this.transactionsService.transactions.subscribe(trans => {
+      this.transactionsAll = trans;
+      this.sortList();
+    });
   }
 
   public validateForm() {
@@ -64,7 +74,9 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.transactionForm.valid) this.showPopover = true;
   }
 
-  public completeTransaction() {
+  public completeTransaction(event) {
+    this.showPopover = false;
+    if (!event) return;
     let transferAmount = parseFloat(this.transactionForm.get("amount").value);
     this.newTransaction = {
       amount: transferAmount.toFixed(2),
@@ -79,7 +91,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.transactionForm.reset();
     this.amountError = '';
     this.toAccountError = '';
-    this.showPopover = false;
   }
 
   public applyFilter(event: any) {

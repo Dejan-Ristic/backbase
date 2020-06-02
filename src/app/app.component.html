@@ -1,5 +1,6 @@
 <div class='wrapper'>
-  <app-popover [ngClass]='{"popover--hide": !showPopover}' [parent]='this'
+  <app-popover [ngClass]='{"popover--hide": !showPopover}'
+               (select)='completeTransaction($event)'
                [amount]='transactionForm.get("amount").value'
                [account]='transactionForm.get("toAccount").value'></app-popover>
   <header class='header'>
